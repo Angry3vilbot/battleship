@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#main{
+    display: flex;
+    background-color: black;
+    height: 100vh;
+}
+#playerGrid{
+    background-color: blue;
+    width: 500px;
+    height: 500px;
+}
+#cpuGrid{
+    background-color: red;
+    width: 500px;
+    height: 500px;
+}
+#playerGrid tr{
+    background-color: rgba(0, 0, 150, 0.5);
+}
+#cpuGrid tr{
+    background-color: rgba(150, 0, 0, 0.5);
+}
