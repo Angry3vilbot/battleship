@@ -23,3 +23,21 @@
 #cpuGrid tr{
     background-color: rgba(150, 0, 0, 0.5);
 }
+#playerGrid tr img, #cpuGrid tr img{
+    width: 25px;
+    padding-left: 10px;
+}
+#playerGrid td, #cpuGrid td{
+    width: 50px;
+    height: 50px;
+    vertical-align: center;
+}
+#playerGrid .hasChild{
+    outline: solid 2px rgb(0, 255, 0);
+}
+#cpuGrid .hasChild{
+    outline: solid 2px rgb(150, 0, 0);
+}
+#cpuGrid td:hover{
+    background-color: rgb(255, 42, 42);
+}
