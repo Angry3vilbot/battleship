@@ -249,7 +249,8 @@ ships.forEach(ship => ship.addEventListener("dragover", (event) => {
 function gameController(){
     function generateCpuShips(){
         let takenPosArray = []
-        for(let i = 0; i < 4; i++){
+        while(cpuBoard.ShipArray.length < 4){
+            let i = 0
             let position = Math.floor(Math.random()*100 + 1)
                 if(takenPosArray.includes(position)){
                     i--
@@ -268,10 +269,11 @@ function gameController(){
                 }
                 
         }
-        for(let i = 0; i < 3; i++){
+        while(cpuBoard.ShipArray.length < 7){
             let position = Math.floor(Math.random()*100 + 1)
             let secondPosArray = [position+1, position+10]
             let secondPos = secondPosArray[Math.floor(Math.random()*secondPosArray.length)]
+            let i = 0
                 if(takenPosArray.includes(position) || takenPosArray.includes(secondPos)){
                     i--
                 }
@@ -280,9 +282,15 @@ function gameController(){
                 }
                 else{
                     if(singletons.includes(position) && (secondPos == position+10) == false){
+                        takenPosArray.push(position, secondPos, secondPos+10, secondPos+11, position-10, secondPos-10, position+10, secondPos+1, secondPos-9)
+                    }
+                    else if(lastOnes.includes(secondPos) && (secondPos == position+10) == false){
+                        takenPosArray.push(position, secondPos, secondPos+9, secondPos+10, position+9, position-1, position-11, position-10, secondPos-10)
+                    }
+                    else if(singletons.includes(position) && (secondPos == position+10) == true){
                         takenPosArray.push(position, secondPos, secondPos+10, secondPos+11, position+11, position-10, position-9, position+1)
                     }
-                    else if(lastOnes.includes(position) && (secondPos == position+10) == false){
+                    else if(lastOnes.includes(position) && (secondPos == position+10) == true){
                         takenPosArray.push(position, secondPos, secondPos+9, secondPos+10, position+9, position-1, position-11, position-10)
                     }
                     else{
@@ -297,10 +305,11 @@ function gameController(){
                 }
                 
         }
-        for(let i = 0; i < 2; i++){
+        while(cpuBoard.ShipArray.length < 9){
             let position = Math.floor(Math.random()*100 + 1)
             let secondPosArray = [position+1, position+10]
             let secondPos = secondPosArray[Math.floor(Math.random()*secondPosArray.length)]
+            let i = 0
                 if(secondPos = position+1){
                     var thirdPos = secondPos+1
                 }
@@ -316,17 +325,34 @@ function gameController(){
                 else{
                     cpuBoard.placeShip([position, secondPos, thirdPos], 3)
                     if(secondPos == position+10){
-                        takenPosArray.push(position, secondPos, thirdPos, position-10, thirdPos+10, position-1, position+1, secondPos-1, secondPos+1, thirdPos-1, thirdPos+1, thirdPos+9, thirdPos+11, position-9, position-11)
+                        if(singletons.includes(position)){
+                            takenPosArray.push(position, secondPos, secondPos+10, secondPos+11, secondPos+20, secondPos+21, position+11, position-10, position+1, position-9)
+                        }
+                        else if(lastOnes.includes(position)){
+                            takenPosArray.push(position, secondPos, secondPos+9, secondPos+10, secondPos+19, secondPos+20, position+9, position-1, position-11, position-10)
+                        }
+                        else{
+                            takenPosArray.push(position, secondPos, thirdPos, position-10, thirdPos+10, position-1, position+1, secondPos-1, secondPos+1, thirdPos-1, thirdPos+1, thirdPos+9, thirdPos+11, position-9, position-11)
+                        }
                     }
                     else{
-                        takenPosArray.push(position, secondPos, thirdPos, position-1, thirdPos+1, position+9, position+10, position+11, thirdPos+10, thirdPos+11, position-11, position-10, position-9, thirdPos-10, thirdPos-9)
+                        if(singletons.includes(position)){
+                            takenPosArray.push(position, secondPos, secondPos+10, secondPos+11, position-10, position+10, secondPos-10, thirdPos, thirdPos-10, thirdPos+1, thirdPos+11, thirdPos-9)
+                        }
+                        else if(lastOnes.includes(thirdPos)){
+                            takenPosArray.push(position, secondPos, secondPos+9, secondPos+10, position+9, position-1, position-11, position-10, secondPos-10, thirdPos, thirdPos-10, thirdPos+10)
+                        }
+                        else{
+                            takenPosArray.push(position, secondPos, thirdPos, position-1, thirdPos+1, position+9, position+10, position+11, thirdPos+10, thirdPos+11, position-11, position-10, position-9, thirdPos-10, thirdPos-9)
+                        }
                     }
                 }
         }
-        for(let i = 0; i < 1; i++){
+        while(cpuBoard.ShipArray.length < 10){
             let position = Math.floor(Math.random()*100 + 1)
             let secondPosArray = [position+1, position+10]
             let secondPos = secondPosArray[Math.floor(Math.random()*secondPosArray.length)]
+            let i = 0
             if(secondPos = position+1){
                 var thirdPos = secondPos+1
                 var fourthPos = secondPos+2
@@ -344,11 +370,17 @@ function gameController(){
                 else{
                     cpuBoard.placeShip([position, secondPos, thirdPos, fourthPos], 4)
                     if(secondPos == position+10){
-                        if(singletons.includes(position)){
-                            takenArray.push(position, secondPos, secondPos+10, secondPos+11, secondPos+20, secondPos+21, position+11, position-10, position+1)
+                        if(singletons.includes(position) && (secondPos == position+10) == true){
+                            takenArray.push(position, secondPos, secondPos+10, secondPos+11, secondPos+20, secondPos+21, position+11, position-10, position+1, fourthPos+10, fourthPos+11, position-9)
                         }
-                        else if(lastOnes.includes(position)){
-                            takenArray.push(position, secondPos, secondPos+9, secondPos+10, secondPos+19, secondPos+20, position+9, position-1, position-11, position-10)
+                        else if(lastOnes.includes(position) && (secondPos == position+10) == true){
+                            takenArray.push(position, secondPos, secondPos+9, secondPos+10, secondPos+19, secondPos+20, position+9, position-1, position-11, position-10, fourthPos+10, fourthPos+9)
+                        }
+                        if(singletons.includes(position) && (secondPos == position+10) == false){
+                            takenArray.push(position, secondPos, secondPos+10, secondPos+11, position-10, fourthPos+10, fourthPos+11, position-9, position+10, thirdPos, fourthPos, thirdPos-10, fourthPos-10, fourthPos-9, fourthPos+1)
+                        }
+                        else if(lastOnes.includes(fourthPos) && (secondPos == position+10) == false){
+                            takenArray.push(position, secondPos, secondPos+9, secondPos+10, position+9, position-1, position-11, position-10, fourthPos+10, fourthPos+9, fourthPos-10, thirdPos-10, secondPos-10, thirdPos, fourthPos)
                         }
                         else{
                             takenPosArray.push(position, secondPos, thirdPos, fourthPos, position-11, position-10, position-9, position-1, position+1, secondPos-1, secondPos+1, thirdPos-1, thirdPos+1, fourthPos+1, fourthPos-1, fourthPos+9, fourthPos+10, fourthPos+11)
