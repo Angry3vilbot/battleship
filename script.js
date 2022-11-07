@@ -99,8 +99,10 @@ function gameBoard(){
             })
         },
         playerAttack(){
-            cpuBoard.receiveAttack(parseInt(this.classList[0]))
-            cpuTurn()
+            if(cpuBoard.MissArray.includes(parseInt(this.className)) == false){
+                cpuBoard.receiveAttack(parseInt(this.classList[0]))
+                cpuTurn()
+            }
         },
         checkWinCondition(){
             if(cpuBoard.HitArray.length === 20){
