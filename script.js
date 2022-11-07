@@ -255,10 +255,10 @@ function gameController(){
                     i--
                 }
                 else{
-                    if(singletons.includes(startingCoord)){
+                    if(singletons.includes(position)){
                         takenPosArray.push(position, position+1, position+10, position+11, position-10, position-9)
                     }
-                    else if(lastOnes.includes(startingCoord)){
+                    else if(lastOnes.includes(position)){
                         takenPosArray.push(position, position+10, position+9, position-1, position-11, position-10)
                     }
                     else{
