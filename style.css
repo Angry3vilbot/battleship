@@ -7,6 +7,52 @@
     background-color: black;
     height: 100vh;
 }
+#overlay{
+    display: none;
+}
+#overlay.active{
+    display: block;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+#ship-placement{
+    z-index: 3;
+    display: none;
+}
+#ship-placement.active{
+    display: block;
+    position: fixed;
+    left: 33%;
+    top: 10%;
+    background-color: blue;
+    width: 500px;
+    height: 520px;
+}
+#ship-placement tr{
+    background-color: rgba(0, 0, 150, 0.5);
+}
+#ship-placement .hasChild{
+    outline: solid 2px rgb(0, 255, 0);
+}
+#ships{
+    z-index: 3;
+    display: flex;
+    width: 200px;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+#ships div{
+    width: fit-content;
+    height: fit-content;
+}
+#ships div div{
+    outline: solid 2px rgb(0, 255, 0);
+    width: 50px;
+    height: 50px;
+}
 #playerGrid{
     background-color: blue;
     width: 500px;
@@ -27,7 +73,7 @@
     width: 25px;
     padding-left: 10px;
 }
-#playerGrid td, #cpuGrid td{
+#playerGrid td, #cpuGrid td, #ship-placement td{
     width: 50px;
     height: 50px;
     vertical-align: center;
