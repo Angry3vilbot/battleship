@@ -12,6 +12,10 @@ function Ship(length, coords){
             if(this.hits === this.length){
                 this.sunk = true
                 console.log('YOU SANK MY BATTLESHIP!!!!!!!!')
+                return true
+            }
+            else{
+                return false
             }
         }
     }
@@ -21,6 +25,7 @@ function gameBoard(){
         MissArray: [],
         ShipArray: [],
         HitArray: [],
+        damagedArray: [],
         placeShip(coords, length){
             this.ShipArray.push(Ship(length, coords))
         },
@@ -40,8 +45,12 @@ function gameBoard(){
                         this.ShipArray.forEach(ship => {
                             if(ship.location.includes(coords)){
                                 ship.hit()
+                                this.damagedArray.push(coords)
                                 this.HitArray.push(coords)
                                 ship.isSunk()
+                                if(ship.isSunk() == true){
+                                    this.damagedArray.length = 0
+                                }
                                 ship.location.splice(ship.location.indexOf(coords), 1)
                                 this.checkWinCondition()
                                 return
@@ -112,7 +121,7 @@ function gameBoard(){
                 alert('CPU Wins')
             }
         }
-        }
+    }
 }
 
 let playerBoard = new gameBoard
@@ -402,12 +411,32 @@ function gameController(){
 }
 
 function cpuTurn(){
-    let move = Math.floor(Math.random()*100 + 1)
-    if(playerBoard.MissArray.includes(move) == false){
-        playerBoard.receiveAttack(move)
+    console.log(playerBoard.damagedArray.length > 0)
+    if(playerBoard.damagedArray.length > 0){
+        let move = Math.floor(Math.random()*100 + 1)
+        if(playerBoard.damagedArray.includes(move+1) || playerBoard.damagedArray.includes(move-1) || playerBoard.damagedArray.includes(move+10) || playerBoard.damagedArray.includes(move-10)){
+            console.log('Move is valid')
+            if(playerBoard.MissArray.includes(move) == false){
+                console.log(`${move} next to damaged`)
+                playerBoard.receiveAttack(move)
+            }
+            else{
+                cpuTurn()
+            }
+        }
+        else{
+            cpuTurn()
+        }
     }
     else{
-        cpuTurn()
+        let move = Math.floor(Math.random()*100 + 1)
+        if(playerBoard.MissArray.includes(move) == false){
+            playerBoard.receiveAttack(move)
+        }
+        else{
+            cpuTurn()
+        }
     }
+    
 }
 window.onload = gameController
