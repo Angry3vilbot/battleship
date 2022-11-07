@@ -6,6 +6,9 @@
     display: flex;
     background-color: black;
     height: 100vh;
+    justify-content: space-around;
+    gap: 50px;
+    align-items: center;
 }
 #overlay{
     display: none;
@@ -38,11 +41,14 @@
     outline: solid 2px rgb(0, 255, 0);
 }
 #ships{
+    position: fixed;
     z-index: 3;
     display: flex;
     width: 200px;
     flex-wrap: wrap;
     gap: 25px;
+    left: 75%;
+    top: 10%;
 }
 #ships div{
     width: fit-content;
